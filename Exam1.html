@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+var arr = ['132CXVN', 'SKU', 'MXX', 'WWWW', '79', 'mic7979', 'm98opt'];
+<!-- kiểm tra kí tự đặc biệt -->
+var format=/[a-zA-Z][1-9][1-9][a-zA-Z]/;
+var format1=/[a-zA-Z][1-9]/;
+var format2=/[1-9][a-zA-Z]/;
+var formatnumber =/[1-9]/;
+<!-- kiểm tra chuổi string -->
+var formatstring=/[a-zA-Z]/;
+ function NumToStr()  {
+   var p;
+  for(let i=0;i<arr.length;i++)
+  {
+    if(format1.test(arr[i]))
+    {
+      if(format2.test(arr[i])==false)
+      {
+        for(let j=0;j<arr[i].length;j++)
+  		 	{
+  		 		if(formatstring.test(arr[i][j]))
+  		 		{
+  		 			document.write(arr[i][j]);
+  		 		}
+          else {
+            p=j;
+            break;
+          }
+  		 	}
+  		 	document.write('-');
+  		 	document.write(arr[i].slice(p, arr[i].length));
+  		 	document.write("<br/>");
+      }
+    }
+  }
+}
+function StrToNum(){
+  var p;
+  for(let i=0;i<arr.length;i++)
+  {
+    if(format2.test(arr[i]))
+    {
+      if(format1.test(arr[i])==false)
+      {
+        for(let j=0;j<arr[i].length;j++)
+  		 	{
+  		 		if(formatnumber.test(arr[i][j]))
+  		 		{
+  		 			document.write(arr[i][j]);
+  		 		}
+          else {
+            p=j;
+            break;
+          }
+  		 	}
+  		 	document.write('-');
+        document.write(arr[i].slice(p, arr[i].length));
+  		 	document.write("<br/>");
+      }
+    }
+  }
+}
+function Mix()
+{
+  var p;
+  for(let i=0;i<arr.length;i++)
+  {
+    if(format.test(arr[i]))
+    {
+      for(let j=0;j<arr[i].length;j++)
+      {
+        if(formatstring.test(arr[i][j]))
+        {
+          document.write(arr[i][j]);
+        }
+        else {
+          p=j;
+          break;
+        }
+      }
+      document.write('-');
+      document.write(arr[i].slice(p, arr[i].length));
+      document.write("<br/>");
+    }
+  }
+}
+function Mix1()
+{
+  var p;
+  for(let i=0;i<arr.length;i++)
+  {
+    if(format.test(arr[i]))
+    {
+      for(let j=arr[i].length;j>1;j--)
+      {
+        if(formatstring.test(arr[i][j])==false)
+        {
+            p=j;
+        }
+      }
+      document.write(arr[i].slice(0, p+1));
+      document.write('-');
+      document.write(arr[i].slice(p+1, arr[i].length));
+      document.write("<br/>");
+    }
+  }
+}
+function Mix2()
+{
+  var p,q;
+
+  for(let i=0;i<arr.length;i++)
+  {
+    if(format.test(arr[i]))
+    {
+      for(let j=0;j<arr[i].length;j++)
+      {
+        if(formatstring.test(arr[i][j])==false)
+        {
+          p=j;
+        }
+      }
+      for(let j=arr[i].length;j>1;j--)
+      {
+        if(formatstring.test(arr[i][j])==false)
+        {
+            q=j;
+        }
+      }
+      document.write(arr[i].slice(0, p-1));
+      document.write('-');
+      document.write(arr[i].slice(p-1, q+1));
+      document.write('-');
+      document.write(arr[i].slice(q+1, arr[i].length));
+      document.write("<br/>");
+    }
+  }
+}
+
+NumToStr();
+StrToNum();
+Mix();
+Mix1();
+Mix2();
+</script>
+</head>
+</html>
