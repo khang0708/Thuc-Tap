@@ -21,7 +21,8 @@
               }
               else
               {
-               a();               
+               a(); 
+               await waitFor((i-1)*1000);    
               }
             }
            };
