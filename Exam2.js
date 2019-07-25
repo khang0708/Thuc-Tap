@@ -3,7 +3,7 @@ const run = async (numConcurrentTasks, getTask) => {
   var listTask=[];
    async function res(){
      return new Promise((resolve,reject)=>{
-       //Run 3 task cùng lúc
+       //Lấy 3 task để chạy cùng lúc
        for(let i=0;i<numConcurrentTasks;i++){
          let a = getTask();
         resolve( listTask.push(a()));
