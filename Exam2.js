@@ -1,30 +1,31 @@
 
 const run = async (numConcurrentTasks, getTask) => {
-  var listTask=[];
-   let res = async() =>{
-     return new Promise((resolve,reject)=>{
-       //Lấy 3 task để chạy cùng lúc
-       for(let i=0;i<numConcurrentTasks;i++){
+ 
+    let listConcurrentasks=[];
+    for(let i=0;i<numConcurrentTasks;i++){
+      let a = getTask();
+      listConcurrentasks.push(a());
+   }
+   await Promise.all(listConcurrentasks.map(item =>{
+     return item.then(async () =>{
+       for(let i = 0 ;i<numConcurrentTasks;i++)
+       {
          let a = getTask();
-        resolve( listTask.push(a()));
-       }
-     })     
-    }
-   res().then(
-    await Promise.all(listTask.map(item=>{
-    return item.then(async ()=>{
-      //Chạy các task còn lại
-      for(let i = numConcurrentTasks;i<10;i++)
-      {
-        let a=getTask();
-        if(a !== undefined){
+         if(a !== undefined)
+         {
          await a();
-        }      
-      }
-    })  
-  })))
-  .catch(e =>console.log(e));
-};
+         numConcurrentTasks = numConcurrentTasks -1;
+         if(numConcurrentTasks <3){
+             numConcurrentTasks = numConcurrentTasks +1;
+           }
+         }
+         else{
+           break;
+         }          
+       }
+     });
+   }))  
+}
 
 /**
 * This function is used to stimulate task processing time
